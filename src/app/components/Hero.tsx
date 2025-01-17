@@ -1,4 +1,6 @@
+'use client'
 import { Sparkles, ArrowRight  } from 'lucide-react';
+import { redirect } from 'next/navigation';
 import React from 'react';
 
 const Hero = () => {
@@ -17,7 +19,7 @@ const Hero = () => {
             </div>
             
             <div className='flex items-center mt-14 gap-7 animate-slowBounce duration-2000 select-none'>
-                <div className='text-white bg-blue-700 flex items-center p-[19px] px-8 rounded-full gap-1 bg-gradient-to-r from-blue-800 to-purple-500 hover:cursor-pointer hover:bg-gradient-to-r hover:from-blue-800 hover:to-purple-600 hover:scale-105 duration-500'>
+                <div className='text-white bg-blue-700 flex items-center p-[19px] px-8 rounded-full gap-1 bg-gradient-to-r from-blue-800 to-purple-500 hover:cursor-pointer hover:bg-gradient-to-r hover:from-blue-800 hover:to-purple-600 hover:scale-105 duration-500' onClick={() => redirect('/chat')}>
                     Get Started Free
                     <ArrowRight color='white' size={18}/>
                 </div>

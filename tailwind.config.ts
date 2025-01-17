@@ -8,12 +8,12 @@ export default {
   ],
   theme: {
     extend: {
-      animation: {
-        slowBounce: 'bounce 4s infinite', // Slows down bounce to 3 seconds
-      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+      },
+      animation: {
+        slowBounce: 'bounce 4s infinite',
       },
     },
   },
