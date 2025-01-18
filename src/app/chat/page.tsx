@@ -44,7 +44,7 @@ const page = () => {
 
             const data = await response.json();
 
-            console.log("From page.tsx: ",data);
+            // console.log("From page.tsx: ",data);
             if (data.error) {
                 console.error(data.error);
                 return;
