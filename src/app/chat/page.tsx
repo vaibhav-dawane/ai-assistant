@@ -2,11 +2,55 @@
 import React, { useRef, useState } from 'react';
 import {ArrowLeft, Send, BotMessageSquare, User } from 'lucide-react';
 
+interface ChatMessage {
+    id: number,
+    question: string;
+    answer: string;
+}
+
 const page = () => {
+    let idCounter = 0;
     const messagesEndRef = useRef<HTMLDivElement>(null);
-    const [messages, setMessages] = useState([
-        { id: 1, text: "Hello! I'm your AI writing assistant. How can I help you today?" },
-      ]);
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const [input, setInput] = useState('');
+    const [messages, setMessages] = useState<ChatMessage[]>([]);
+
+    const sendPrompt = async () => {
+        inputRef.current!.value = '';
+        
+        const prompt = input;
+        setInput('');
+        try {
+            const response = await fetch('/api/gemini', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt }),
+            });
+
+            const data = await response.json();
+
+            console.log("From page.tsx: ",data);
+            if (data.error) {
+                console.error(data.error);
+                return;
+            }
+
+            setMessages((prev) => [
+                ...prev,
+                { id: idCounter++ ,question:prompt, answer: data || 'No response from AI' }
+            ]);
+        } catch (error) {
+            console.error('Unable to send request: ', error);
+        }
+    }
+
+    const handleEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            sendPrompt();
+        }
+    }
+
     return (
         <div className='flex justify-center w-full'>
             <div className='mt-4 w-[900px] h-[530px] border rounded-t-2xl shadow-2xl'>
@@ -25,32 +69,40 @@ const page = () => {
 
                 <div className='h-[350px] border-b '>
                     <div className="flex-1 overflow-y-auto p-5 space-y-4">
-                        {messages.map((msg) => (
-                            <div className='flex items-center'>
-                                <div key={msg.id}>
-                                    <BotMessageSquare color='#fff' size={34} className='bg-slate-900 p-[8px] rounded-full'/>
+                        {/* default bot message */}
+                        <div className='flex items-center'>
+                            <div>
+                                <BotMessageSquare color='#fff' size={34} className='bg-slate-900 p-[8px] rounded-full'/>
+                            </div>
+                            <div className="p-2 shadow-sm rounded-lg max-w-[530px]">
+                                Hello! I'm your AI writing assistant. How can I help you today?
+                            </div>
+                        </div>
+
+                        {/* user's question */}
+                        {messages?.map((msg) => (
+                            <div key={msg.id}>
+                                <div className='flex justify-end items-center'>
+                                    <div
+                                        className="p-2 shadow-sm rounded-lg max-w-[530px] bg-slate-700 text-white"
+                                        >
+                                        {msg.question}
+                                    </div>
+                                    <div>
+                                        <User color='#000' size={34} className='ml-3 bg-slate-100 p-[8px] rounded-full'/>
+                                    </div>
                                 </div>
-                                <div
-                                    key={msg.id}
-                                    className="p-2 shadow-sm rounded-lg max-w-[530px]"
-                                >
-                                    {msg.text}
+                                <div className='flex items-center'>
+                                    <div>
+                                        <BotMessageSquare color='#fff' size={34} className='bg-slate-900 p-[8px] rounded-full'/>
+                                    </div>
+                                    <div className="p-2 shadow-sm rounded-lg max-w-[530px]">
+                                        {msg.answer}
+                                    </div>
                                 </div>
                             </div>
                         ))}
-                        {messages.map((msg) => (
-                            <div className='flex justify-end items-center'>
-                                <div
-                                    key={msg.id}
-                                    className="p-2 shadow-sm rounded-lg max-w-[530px] bg-slate-700 text-white"
-                                >
-                                    {msg.text}
-                                </div>
-                                <div key={msg.id}>
-                                    <User color='#000' size={34} className='ml-3 bg-slate-100 p-[8px] rounded-full'/>
-                                </div>
-                            </div>
-                        ))}
+                        
                         {/* Scroll Target */}
                         <div ref={messagesEndRef} />
                     </div>
@@ -58,11 +110,16 @@ const page = () => {
                 
                 <div className='flex justify-center mt-5'>
                     <input
-                    type="text"
-                    placeholder="Type a message..."
-                    className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-[2px] focus:ring-slate-900 w-[800px]"
+                        ref={inputRef}
+                        type="text"
+                        placeholder="Type a message..."
+                        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-[2px] focus:ring-slate-900 w-[800px]"
+                        onChange={(e) => {
+                            setInput(e.target.value);
+                        }}
+                        onKeyDown={handleEnter}
                     />
-                    <Send className='ml-3 mt-[2px] cursor-pointer hover:bg-slate-800 rounded-lg bg-slate-900 p-2' size={38} color='#fff'/>
+                    <Send className='ml-3 mt-[2px] cursor-pointer hover:bg-slate-800 rounded-lg bg-slate-900 p-2' size={38} color='#fff' onClick={sendPrompt}/>
                 </div>
             </div>
 
