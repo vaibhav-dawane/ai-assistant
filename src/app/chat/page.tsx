@@ -90,7 +90,7 @@ const ChatPage = () => {
                 </div>
 
                 <div className='h-[350px] border-b '>
-                    <div className="flex-1 overflow-y-auto p-5 space-y-4" 
+                    <div className='flex-1 overflow-y-auto p-5 space-y-4' 
                         style={{
                         maxHeight: '350px',
                         boxSizing: 'border-box',
@@ -100,12 +100,12 @@ const ChatPage = () => {
                             <div>
                                 <BotMessageSquare color='#fff' size={34} className='bg-slate-900 p-[8px] rounded-full'/>
                             </div>
-                            <div className="pl-2 shadow-sm rounded-lg max-w-[630px]"
+                            <div className='pl-2 shadow-sm rounded-lg max-w-[630px]'
                             style={{
                                 wordBreak: 'break-word',
                             }}
                             >
-                                Hello! I'm your AI writing assistant. How can I help you today?
+                                Hello! I&apos;m your AI writing assistant. How can I help you today?
                             </div>
                         </div>
 
@@ -114,7 +114,7 @@ const ChatPage = () => {
                             <div key={msg.id}>
                                 <div className='flex justify-end items-center'>
                                     <div
-                                        className="p-2 shadow-sm rounded-lg max-w-[400px] bg-slate-700 text-white text-justify"
+                                        className='p-2 shadow-sm rounded-lg max-w-[400px] bg-slate-700 text-white text-justify'
                                         >
                                         {msg.question}
                                     </div>
@@ -126,8 +126,8 @@ const ChatPage = () => {
                                     <div>
                                         <BotMessageSquare color='#fff' size={34} className='bg-slate-900 p-[8px] rounded-full'/>
                                     </div>
-                                    <div className="p-2 shadow-sm rounded-lg max-w-[630px] text-justify">
-                                        {msg.answer || (loading && <Loader size={20} className="animate-spin" />)}
+                                    <div className='p-2 shadow-sm rounded-lg max-w-[630px] text-justify'>
+                                        {msg.answer || (loading && <Loader size={20} className='animate-spin' />)}
                                     </div>
                                 </div>
                             </div>
@@ -141,9 +141,9 @@ const ChatPage = () => {
                 <div className='flex justify-center mt-5'>
                     <input
                         ref={inputRef}
-                        type="text"
-                        placeholder="Type a message..."
-                        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-[2px] focus:ring-slate-900 w-[800px]"
+                        type='text'
+                        placeholder='Type a message...'
+                        className='border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-[2px] focus:ring-slate-900 w-[800px]'
                         onChange={(e) => {
                             setInput(e.target.value);
                         }}
