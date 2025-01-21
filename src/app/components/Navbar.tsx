@@ -6,7 +6,7 @@ const Navbar = () => {
         <div className='pb-4 bg-white/70 shadow drop-shadow-sm fixed z-50 backdrop-blur-md w-full'>
             <div className='flex justify-between mt-4 mx-16'>
                 <div className='flex items-center gap-1 text-blue-800 font-semibold'>
-                    <Sparkles className='animate-pulse' color="#2c5282" size={18} strokeWidth={1.75}/>
+                    <Sparkles className='animate-pulse' color='#2c5282' size={18} strokeWidth={1.75}/>
                     AI Writer
                 </div>
                 

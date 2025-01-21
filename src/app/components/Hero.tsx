@@ -7,7 +7,7 @@ const Hero = () => {
     return (
         <div className='bg-gradient-to-b from-cyan-50 to-white h-screen flex flex-col items-center'>
             <div className='flex items-center gap-1 text-blue-800 font-semibold mt-24'>
-                <Sparkles className='animate-pulse' color="#2c5282" size={18} strokeWidth={1.75}/>
+                <Sparkles className='animate-pulse' color='#2c5282' size={18} strokeWidth={1.75}/>
                 AI-POWERED WRITING ASSISTANT
             </div>
             <div className='text-6xl mt-8 font-bold'>

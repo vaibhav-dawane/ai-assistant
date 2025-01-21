@@ -10,8 +10,8 @@ export async function POST(req: Request) {
         conversationContext.push(prompt);
         const genAI = new GoogleGenerativeAI(process.env.API_KEY!);
         const model = genAI.getGenerativeModel({ 
-            model: "gemini-1.5-flash",
-            systemInstruction: "You are a AI Writing Asistant, Answer Accordingly" 
+            model: 'gemini-1.5-flash',
+            systemInstruction: 'You are a AI Writing Asistant, Answer Accordingly' 
         });
 
         // for line breaking, it will store new message exchange in new line
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
 
         conversationContext.push(assistantResponse);
         
-        console.log("Context Store: ", conversationContext);
+        console.log('Context Store: ', conversationContext);
         
         if (conversationContext.length > 20) {
             conversationContext = conversationContext.slice(-20); // Keep only the last 20 messages
