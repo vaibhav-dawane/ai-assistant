@@ -8,7 +8,7 @@ interface ChatMessage {
     answer: string;
 }
 
-const page = () => {
+const ChatPage = () => {
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -157,4 +157,4 @@ const page = () => {
         </div>
     );
 }
-export default page
+export default ChatPage

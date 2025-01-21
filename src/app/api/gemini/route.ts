@@ -37,7 +37,3 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: 'Failed to fetch data' }, { status: 500 });
     }
 }
-
-function calculateTokenCount(context: { role: string; content: string }[]): number {
-    return context.reduce((count, message) => count + message.content.split(' ').length, 0);
-}
