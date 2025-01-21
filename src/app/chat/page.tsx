@@ -19,7 +19,7 @@ const ChatPage = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const sendPrompt = async () => {
+    const SendPrompt = async () => {
         if (!input.trim()) return;
         const newId = idCounter;
         
@@ -65,7 +65,7 @@ const ChatPage = () => {
 
     const handleEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            sendPrompt();
+            SendPrompt();
         }
     }
 
@@ -150,7 +150,7 @@ const ChatPage = () => {
                         onKeyDown={handleEnter}
                         value={input}
                     />
-                    <Send className='ml-3 mt-[2px] cursor-pointer hover:bg-slate-800 rounded-lg bg-slate-900 p-2' size={38} color='#fff' onClick={sendPrompt}/>
+                    <Send className='ml-3 mt-[2px] cursor-pointer hover:bg-slate-800 rounded-lg bg-slate-900 p-2' size={38} color='#fff' onClick={SendPrompt}/>
                 </div>
             </div>
 
