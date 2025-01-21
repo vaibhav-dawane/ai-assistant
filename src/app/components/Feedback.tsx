@@ -8,7 +8,7 @@ const Feedback = () => {
                 Trusted by Writers Worldwide
             </div>
             <div className='flex justify-center mt-16'>
-                <div className='grid grid-cols-3 gap-x-8'>
+                <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
                     <div className='w-[390px] h-[280px] rounded-2xl bg-white shadow-xl flex flex-col hover:-translate-y-3 duration-300 hover:shadow-2xl'>
                         <div className='h-1/2 flex justify-center mt-[-15px] '>
                             <div className='w-20 h-20 mt-12 flex justify-center items-center rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 relative'>

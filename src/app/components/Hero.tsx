@@ -14,7 +14,7 @@ const Hero = () => {
                 Write Better, <span className='text-blue-800'>Faster</span>
             </div>
 
-            <div className='mt-6 text-gray-500 w-[650px] text-center text-[20px] font-normal leading-8'>
+            <div className='mt-6 text-gray-500 w-[650px] sm:pl-4 text-center text-[20px] font-normal leading-8'>
                 Enhance your writing with our AI-powered assistant. Get suggestions, improve clarity, and eliminate errors in real-time.
             </div>
             
