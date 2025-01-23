@@ -11,7 +11,7 @@ export async function POST(req: Request) {
         const genAI = new GoogleGenerativeAI(process.env.API_KEY!);
         const model = genAI.getGenerativeModel({ 
             model: 'gemini-1.5-flash',
-            systemInstruction: 'You are a AI Writing Asistant, Answer Accordingly' 
+            systemInstruction: "You are an AI Writing Assistant designed to generate clear, concise, and high-quality content tailored to the user's needs. Maintain an engaging, professional tone while respecting any specific guidelines provided in the prompt"
         });
 
         // for line breaking, it will store new message exchange in new line
