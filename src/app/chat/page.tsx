@@ -1,6 +1,7 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react';
 import {ArrowLeft, Send, BotMessageSquare, User, Loader } from 'lucide-react';
+import Link from 'next/link';
 
 interface ChatMessage {
     id: number,
@@ -76,13 +77,15 @@ const ChatPage = () => {
     return (
         <div className='flex justify-center w-full'>
             <div className='mt-4 w-[90%] sm:w-[900px] h-[530px] border rounded-t-2xl shadow-2xl'>
-                <div className='w-full h-24 border-b-2 flex items-center justify-start px-8'>
-                    <div className='flex items-center sm:ml-8'>
-                        <div className='hover:bg-slate-100 p-2 rounded-full cursor-pointer'>
-                            <ArrowLeft size={20}/>
-                        </div>
+                <div className='w-full h-24 border-b-2 flex items-center justify-start px-3'>
+                    <div className='flex items-center ml-2 sm:ml-4'>
+                        <Link href='/' prefetch>
+                            <div className='hover:bg-slate-100 p-2 rounded-full cursor-pointer'>
+                                <ArrowLeft size={20}/>
+                            </div>
+                        </Link>
 
-                        <div className='ml-6'>
+                        <div className='ml-3'>
                             <h1 className='text-2xl font-bold text-black opacity-80'>AI Writing Assistant</h1>
                             <p className='text-gray-500 text-base font-normal'>Your personal writing companion</p>
                         </div>
