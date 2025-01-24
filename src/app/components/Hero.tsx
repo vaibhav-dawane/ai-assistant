@@ -1,7 +1,6 @@
 'use client'
 import { Sparkles, ArrowRight  } from 'lucide-react';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import React from 'react';
 
 const Hero = () => {
