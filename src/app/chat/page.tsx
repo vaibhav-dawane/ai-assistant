@@ -5,8 +5,9 @@ import Link from 'next/link';
 
 interface ChatMessage {
     id: number,
-    question: string;
-    answer: string;
+    question: string,
+    answer: string,
+    loading: boolean
 }
 
 const ChatPage = () => {
@@ -18,8 +19,6 @@ const ChatPage = () => {
 
     const [idCounter, setIdCounter] = useState(0);
 
-    const [loading, setLoading] = useState(false);
-
     const SendPrompt = async () => {
         if (!input.trim()) return;
         const newId = idCounter;
@@ -27,14 +26,13 @@ const ChatPage = () => {
         const prompt = input;
         setMessages((prev) => [
             ...prev,
-            { id: newId, question: prompt, answer:'' },
+            { id: newId, question: prompt, answer:'', loading: true },
         ]);
         
         setInput('');
         inputRef.current!.value = '';
 
         setIdCounter((prev) => prev + 1);
-        setLoading(true);
 
         try {
             const response = await fetch('/api/gemini', {
@@ -53,17 +51,55 @@ const ChatPage = () => {
 
             setMessages((prev) =>
                 prev.map((msg) =>
-                    msg.id === newId ? { ...msg, answer: data || 'No response from AI' } : msg
+                    msg.id === newId ? { ...msg, answer: data || 'No response from AI', loading: false } : msg
                 )
             );
         } catch (error) {
             console.error('Unable to send request: ', error);
         }
-        finally {
-            setLoading(false); // End loading
-        }
     }
 
+   
+    const formatText = (text: string) => {
+        // Split the text into lines for processing line breaks
+        const lines = text.split('\n');
+        return lines.map((line, i) => {
+            // Check for bullet points at the beginning of the line
+            if (line.trim().startsWith('* ')) {
+                return (
+                    <div key={i} style={{ marginLeft: '20px', marginBottom: '8px' }}>
+                        • {line.trim().slice(2)} {/* Remove '* ' and display the rest */}
+                    </div>
+                );
+            }
+    
+            // Process other inline formatting like **bold** or *italic*
+            const chunks = line.split(/(\*\*.*?\*\*|\*.*?\*)/g);
+            return (
+                <p key={i} style={{ marginBottom: '12px' }}>
+                    {chunks.map((chunk, j) => {
+                        if (/^\*\*.*\*\*$/.test(chunk)) {
+                            // Bold text
+                            return (
+                                <strong key={j}>
+                                    {chunk.slice(2, -2)} {/* Remove '**' */}
+                                </strong>
+                            );
+                        } else if (/^\*.*\*$/.test(chunk)) {
+                            // Italic text
+                            return (
+                                <em key={j}>
+                                    {chunk.slice(1, -1)} {/* Remove '*' */}
+                                </em>
+                            );
+                        }
+                        return chunk; // Regular text
+                    })}
+                </p>
+            );
+        });
+    };
+    
     const handleEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             SendPrompt();
@@ -126,7 +162,12 @@ const ChatPage = () => {
                                 <div className='flex items-start mt-2'>
                                         <BotMessageSquare color='#fff' size={34} className='bg-slate-900 p-[8px] rounded-full'/>
                                     <div className='p-2 shadow-sm rounded-lg max-w-[630px] text-justify'>
-                                        {msg.answer || (loading && <Loader size={20} className='animate-spin' />)}
+                                        {/* { formatText(msg.answer) || (loading && <Loader size={20}  className='animate-spin' />)} */}
+                                        {msg.loading ? (
+                                            <Loader size={20} className='animate-spin' />
+                                        ) : (
+                                            formatText(msg.answer)
+                                        )}
                                     </div>
                                 </div>
                             </div>
