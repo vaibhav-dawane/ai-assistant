@@ -13,8 +13,8 @@ const Feedback = () => {
 
                     <div className='w-full max-w-sm h-[280px] rounded-2xl bg-white shadow-xl flex flex-col hover:-translate-y-3 duration-300 hover:shadow-2xl'>
                         <div className='h-1/2 flex justify-center -mt-4'>
-                            <div className='w-20 h-20 mt-6 flex justify-center items-center rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 relative'>
-                                <div className='absolute inset-0 rounded-full blur-md bg-gradient-to-br from-purple-500 to-indigo-600'></div>
+                            <div className='w-20 h-20 mt-8 flex justify-center items-center rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 relative'>
+                                <div className='absolute inset-0 rounded-full blur-md opacity-55 bg-gradient-to-br from-purple-500 to-indigo-600'></div>
                                 <img src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150' alt='' className='w-20 h-20 rounded-full z-10 border-4 border-white' />
                             </div>
                         </div>
@@ -31,8 +31,8 @@ const Feedback = () => {
 
                     <div className='w-full max-w-sm h-[280px] rounded-2xl bg-white shadow-xl flex flex-col hover:-translate-y-3 duration-300 hover:shadow-2xl'>
                         <div className='h-1/2 flex justify-center -mt-4'>
-                            <div className='w-20 h-20 mt-6 flex justify-center items-center rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 relative'>
-                                <div className='absolute inset-0 rounded-full blur-md bg-gradient-to-br from-purple-500 to-indigo-600'></div>
+                            <div className='w-20 h-20 mt-8 flex justify-center items-center rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 relative'>
+                                <div className='absolute inset-0 rounded-full blur-md opacity-55 bg-gradient-to-br from-purple-500 to-indigo-600'></div>
                                 <img src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150' alt='' className='w-20 h-20 rounded-full z-10 border-4 border-white' />
                             </div>
                         </div>
@@ -49,8 +49,8 @@ const Feedback = () => {
                     
                     <div className='w-full max-w-sm h-[280px] rounded-2xl bg-white shadow-xl flex flex-col hover:-translate-y-3 duration-300 hover:shadow-2xl'>
                         <div className='h-1/2 flex justify-center -mt-4'>
-                            <div className='w-20 h-20 mt-12 flex justify-center items-center rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 relative'>
-                                <div className='absolute inset-0 rounded-full blur-md bg-gradient-to-br from-purple-500 to-indigo-600'></div>
+                            <div className='w-20 h-20 mt-8 flex justify-center items-center rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 relative'>
+                                <div className='absolute inset-0 rounded-full blur-md opacity-55 bg-gradient-to-br from-purple-500 to-indigo-600'></div>
                                 <img src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150' alt='' className='w-20 h-20 rounded-full z-10 border-4 border-white' />
                             </div>
                         </div>
