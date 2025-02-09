@@ -1,4 +1,5 @@
 import { CircleCheckBig } from 'lucide-react';
+import Image from 'next/image';
 import React from 'react';
 
 const Feedback = () => {
@@ -15,7 +16,7 @@ const Feedback = () => {
                         <div className='h-1/2 flex justify-center -mt-4'>
                             <div className='w-20 h-20 mt-8 flex justify-center items-center rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 relative'>
                                 <div className='absolute inset-0 rounded-full blur-md opacity-55 bg-gradient-to-br from-purple-500 to-indigo-600'></div>
-                                <img src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150' alt='' className='w-20 h-20 rounded-full z-10 border-4 border-white' />
+                                <Image src='/1.png' width={80} height={80} alt='' className='rounded-full z-10 border-4 border-white' />
                             </div>
                         </div>
                         <div className='mt-4 px-4 sm:px-6 text-center'>
@@ -33,7 +34,7 @@ const Feedback = () => {
                         <div className='h-1/2 flex justify-center -mt-4'>
                             <div className='w-20 h-20 mt-8 flex justify-center items-center rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 relative'>
                                 <div className='absolute inset-0 rounded-full blur-md opacity-55 bg-gradient-to-br from-purple-500 to-indigo-600'></div>
-                                <img src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150' alt='' className='w-20 h-20 rounded-full z-10 border-4 border-white' />
+                                <Image src='/2.png' width={80} height={80}  alt='' className='rounded-full z-10 border-4 border-white' />
                             </div>
                         </div>
                         <div className='mt-4 px-4 sm:px-6 text-center'>
@@ -51,7 +52,7 @@ const Feedback = () => {
                         <div className='h-1/2 flex justify-center -mt-4'>
                             <div className='w-20 h-20 mt-8 flex justify-center items-center rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 relative'>
                                 <div className='absolute inset-0 rounded-full blur-md opacity-55 bg-gradient-to-br from-purple-500 to-indigo-600'></div>
-                                <img src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150' alt='' className='w-20 h-20 rounded-full z-10 border-4 border-white' />
+                                <Image src='/3.png' width={80} height={80}  alt='' className=' rounded-full z-10 border-4 border-white' />
                             </div>
                         </div>
                         <div className='mt-4 px-4 sm:px-6 text-center'>

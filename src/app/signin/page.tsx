@@ -3,7 +3,7 @@ import { ArrowLeftToLine } from 'lucide-react';
 import Link from 'next/link';
 import React, { useRef } from 'react';
 
-const page = () => {
+const SignIn = () => {
 
     const checkRef = useRef<HTMLInputElement>(null);
     const checkRememberMe = () => {
@@ -59,4 +59,4 @@ const page = () => {
         </div>
     );
 }
-export default page
+export default SignIn
