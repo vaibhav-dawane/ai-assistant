@@ -23,9 +23,9 @@ const SignIn = () => {
             </div>
             
             <div className='flex justify-center items-center select-none'>
-                <div className='w-[400px] h-[350px] shadow-xl rounded-md'>
+                <div className='w-full max-w-[400px] h-[350px] shadow-xl rounded-md mx-auto'>
                     <h1 className='flex justify-center mt-10 font-extrabold text-lg sm:text-xl'>Sign In</h1>
-                    <div className='mt-2 mx-6'>
+                    <div className='mt-2 mx-3 sm:mx-6'>
                         <div className='grid gap-1'>
                             <label htmlFor="email" className='text-gray-500'>Email</label>
                             <input type="text" placeholder='Your@email.com' className='border rounded-md h-10 px-3 outline-none' />
@@ -36,7 +36,7 @@ const SignIn = () => {
                         </div>
                     </div>
 
-                    <div className='mt-2 flex justify-between mx-4 sm:mx-6'>
+                    <div className='mt-2 flex justify-between mx-3 sm:mx-6'>
                         <div className='flex gap-x-1 items-center' onClick={checkRememberMe}>
                             <input ref={checkRef} type="checkbox" name="rememberme" id="" />
                             <label className=''>Remember me</label>

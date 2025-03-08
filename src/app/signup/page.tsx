@@ -22,24 +22,24 @@ const SignUp = () => {
                 </Link>
             </div>
             <div className='flex justify-center items-center select-none'>
-                <div className='w-[400px] h-[380px] shadow-xl rounded-md'>
-                    <h1 className='flex justify-center mt-6 font-extrabold text-xl'>Sign Up</h1>
-                    <div className='mt-2 mx-6'>
+                <div className='w-full max-w-[400px] h-[380px] shadow-xl rounded-md bg-white mx-auto'>
+                    <h1 className='flex justify-center mt-6 font-extrabold text-lg sm:text-xl'>Sign Up</h1>
+                    <div className='mt-2 mx-3 sm:mx-6'>
                         <div className='grid gap-1 mt-2'>
-                            <label htmlFor="email" className='text-gray-500'>Name</label>
-                            <input type="text" placeholder='John Carter' className='border rounded-md h-10 px-3 outline-none' />
+                            <label htmlFor="name" className='text-gray-500'>Name</label>
+                            <input type="text" placeholder='John Carter' className='border rounded-md h-10 px-3 outline-none w-full' />
                         </div>
                         <div className='grid gap-1 mt-2'>
                             <label htmlFor="email" className='text-gray-500'>Email</label>
-                            <input type="text" placeholder='Your@email.com' className='border rounded-md h-10 px-3 outline-none' />
+                            <input type="text" placeholder='Your@email.com' className='border rounded-md h-10 px-3 outline-none w-full' />
                         </div>
                         <div className='grid gap-1 mt-2'>
                             <label htmlFor="password" className='text-gray-500'>Password</label>
-                            <input type="password" placeholder='*******' className='border rounded-md h-10 px-3 outline-none' />
+                            <input type="password" placeholder='*******' className='border rounded-md h-10 px-3 outline-none w-full' />
                         </div>
                     </div>
 
-                    <div className='mt-3 flex justify-between mx-6'>
+                    <div className='mt-3 flex justify-between mx-3 sm:mx-6'>
                         <div className='flex gap-x-1 items-center' onClick={checkRememberMe}>
                             <input ref={checkRef} type="checkbox" name="rememberme" id="" />
                             <label className='cursor-pointer'>Remember me</label>
