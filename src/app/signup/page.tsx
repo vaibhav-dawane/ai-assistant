@@ -1,9 +1,21 @@
 'use client'
 import { ArrowLeftToLine } from 'lucide-react';
 import Link from 'next/link';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import axios from 'axios';
+import { redirect } from 'next/navigation';
+
+interface UserData {
+    name: string;
+    email: string;
+    password: string;
+}
 
 const SignUp = () => {
+
+    const [userData, setUserData] = useState<UserData>({name: "",
+        email: "",
+        password: ""});
 
     const checkRef = useRef<HTMLInputElement>(null);
         const checkRememberMe = () => {
@@ -11,6 +23,16 @@ const SignUp = () => {
                 checkRef.current.checked = !checkRef.current.checked;
             }
         }
+
+    const submitData = async () => {
+        const res =await  axios.post('api/signup', userData)
+            .then(() => console.log("Data Sent Successfully"))
+            .catch((err) => console.log("Error Occured: ", err))
+        
+        console.log(res);
+        
+        redirect('/');
+    }
 
     return (
         <div className='w-full h-[100vh]'>
@@ -27,15 +49,21 @@ const SignUp = () => {
                     <div className='mt-2 mx-3 sm:mx-6'>
                         <div className='grid gap-1 mt-2'>
                             <label htmlFor="name" className='text-gray-500'>Name</label>
-                            <input type="text" placeholder='John Carter' className='border rounded-md h-10 px-3 outline-none w-full' />
+                            <input name="name" type="text" placeholder='John Carter' className='border rounded-md h-10 px-3 outline-none w-full' onChange={(event) => 
+                                setUserData({...userData, name: event.target.value})
+                            }/>
                         </div>
                         <div className='grid gap-1 mt-2'>
                             <label htmlFor="email" className='text-gray-500'>Email</label>
-                            <input type="text" placeholder='Your@email.com' className='border rounded-md h-10 px-3 outline-none w-full' />
+                            <input name="email" type="text" placeholder='Your@email.com' className='border rounded-md h-10 px-3 outline-none w-full' onChange={(event) => 
+                                setUserData({...userData, email: event.target.value})
+                            }/>
                         </div>
                         <div className='grid gap-1 mt-2'>
                             <label htmlFor="password" className='text-gray-500'>Password</label>
-                            <input type="password" placeholder='*******' className='border rounded-md h-10 px-3 outline-none w-full' />
+                            <input name="password" type="password" placeholder='*******' className='border rounded-md h-10 px-3 outline-none w-full' onChange={(event) => 
+                                setUserData({...userData, password: event.target.value})
+                            }/>
                         </div>
                     </div>
 
@@ -47,7 +75,7 @@ const SignUp = () => {
                     </div>
 
                     <div className='flex justify-center mt-3'>
-                        <button className='mx-6 w-full py-1 rounded-md bg-blue-700 text-white font-medium'>Sign up</button>
+                        <button className='mx-6 w-full py-1 rounded-md bg-blue-700 text-white font-medium' onClick={submitData}>Sign up</button>
                     </div>
                 </div>
             </div>
