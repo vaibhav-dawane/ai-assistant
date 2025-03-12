@@ -1,9 +1,27 @@
 'use client'
+import axios from 'axios';
 import { ArrowLeftToLine } from 'lucide-react';
 import Link from 'next/link';
-import React, { useRef } from 'react';
+import { redirect } from 'next/navigation';
+import React, { useRef, useState } from 'react';
+
+interface UserData {
+    email: string;
+    password: string;
+}
 
 const SignIn = () => {
+    const [userData, setUserData] = useState<UserData>({email: "", password: ""});
+
+    const submitData = async () => {
+        try {
+            const res = await axios.post('/api/signin', userData);
+            console.log(res.data.message);
+        } catch (error) {
+            console.log("Error Occured: ", error);
+        }
+        redirect('/');
+    }
 
     const checkRef = useRef<HTMLInputElement>(null);
     const checkRememberMe = () => {
@@ -28,11 +46,21 @@ const SignIn = () => {
                     <div className='mt-2 mx-3 sm:mx-6'>
                         <div className='grid gap-1'>
                             <label htmlFor="email" className='text-gray-500'>Email</label>
-                            <input type="text" placeholder='Your@email.com' className='border rounded-md h-10 px-3 outline-none' />
+                            <input type="text" placeholder='Your@email.com' className='border rounded-md h-10 px-3 outline-none' onChange={(event) => (
+                                setUserData(
+                                    {...userData,
+                                    email: event.target.value}
+                                )
+                            )}/>
                         </div>
                         <div className='mt-3 grid gap-1'>
                             <label htmlFor="password" className='text-gray-500'>Password</label>
-                            <input type="password" placeholder='*******' className='border rounded-md h-10 px-3 outline-none' />
+                            <input type="password" placeholder='*******' className='border rounded-md h-10 px-3 outline-none' onChange={(event) => (
+                                setUserData(
+                                    {...userData,
+                                    password: event.target.value}
+                                )
+                            )}/>
                         </div>
                     </div>
 
@@ -45,7 +73,7 @@ const SignIn = () => {
                     </div>
                     
                     <div className='flex justify-center mt-2'>
-                        <button className='mx-6 w-full py-1 rounded-md bg-blue-700 text-white font-medium'>Sign In</button>
+                        <button className='mx-6 w-full py-1 rounded-md bg-blue-700 text-white font-medium' onClick={submitData}>Sign In</button>
                     </div>
                     
                     <div className='flex justify-center mt-3 tracking-wider'>

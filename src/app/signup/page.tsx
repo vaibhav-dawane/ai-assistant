@@ -25,12 +25,12 @@ const SignUp = () => {
         }
 
     const submitData = async () => {
-        const res =await  axios.post('api/signup', userData)
-            .then(() => console.log("Data Sent Successfully"))
-            .catch((err) => console.log("Error Occured: ", err))
-        
-        console.log(res);
-        
+        try {
+            const res = await  axios.post('api/signup', userData);
+            console.log(res.data.message);
+        } catch (error) {
+            console.log("Error Occured: ", error);
+        }
         redirect('/');
     }
 
