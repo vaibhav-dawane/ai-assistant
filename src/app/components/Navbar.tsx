@@ -30,7 +30,7 @@ const Navbar = () => {
     const logOut = async () => {
         try {
             const res = await fetch('/api/logout', { method: 'POST' });
-            console.log("Data in logout: ",res);
+            // console.log("Data in logout: ",res);
 
             if(res.ok)
             {

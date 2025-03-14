@@ -9,7 +9,7 @@ export async function POST(req: Request)
 {
     try {
         const { email, password } = await req.json(); 
-        console.log("Received data:", email);
+        // console.log("Received data:", email);
 
         let user;
         try {

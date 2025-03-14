@@ -22,9 +22,9 @@ const SignIn = () => {
             return;
         }
         try {
-            console.log("Userdata before sending: ", userData);
+            // console.log("Userdata before sending: ", userData);
             const res = await axios.post('/api/signin', userData);
-            console.log("Response: ", res.status);
+            // console.log("Response: ", res.status);
 
             toast.success("Log In Successful", {
                 position: 'bottom-right',

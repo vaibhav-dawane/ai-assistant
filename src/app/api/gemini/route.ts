@@ -13,7 +13,7 @@ export async function POST(req: Request) {
         const instructions = "You are an AI Writing Assistant designed to generate clear, concise, and high-quality content tailored to the user's needs. Maintain an engaging, professional tone while respecting any specific guidelines provided in the prompt"
 
         const model = genAI.getGenerativeModel({ 
-            model: 'gemini-1.5-flash',
+            model: 'gemini-2.0-flash',
             systemInstruction: instructions,
         });
 

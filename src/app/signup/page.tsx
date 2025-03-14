@@ -35,7 +35,7 @@ const SignUp = () => {
                 position: 'bottom-right',
             });
             router.push('/');
-            console.log(res.data.message);
+            // console.log(res.data.message);
         } catch (error) {
             console.log("Error Occured: ", error);
         }
