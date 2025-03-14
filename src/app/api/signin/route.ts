@@ -10,16 +10,11 @@ export async function POST(req: Request)
     try {
         const { email, password } = await req.json(); 
         // console.log("Received data:", email);
-
-        let user;
-        try {
-            // to check user
-            user = await prisma.user.findUnique({where: {
-                email
-            }})
-        } catch (error) {
-            return NextResponse.json({message: "Error Occured While fetching data"}, {status: 500})
-        }
+        
+        // to check user
+        const user = await prisma.user.findUnique({where: {
+            email
+        }})
     
         // check if user exist or not
         if(!user)

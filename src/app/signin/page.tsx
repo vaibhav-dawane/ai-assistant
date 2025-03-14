@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { ArrowLeftToLine } from 'lucide-react';
 import Link from 'next/link';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import React, { useRef, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,7 +23,7 @@ const SignIn = () => {
         }
         try {
             // console.log("Userdata before sending: ", userData);
-            const res = await axios.post('/api/signin', userData);
+            await axios.post('/api/signin', userData);
             // console.log("Response: ", res.status);
 
             toast.success("Log In Successful", {

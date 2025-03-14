@@ -3,8 +3,8 @@ import { ArrowLeftToLine } from 'lucide-react';
 import Link from 'next/link';
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
-import { redirect, useRouter } from 'next/navigation';
-import { ToastContainer, toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 interface UserData {
@@ -30,7 +30,7 @@ const SignUp = () => {
 
     const submitData = async () => {
         try {
-            const res = await  axios.post('api/signup', userData);
+            await  axios.post('api/signup', userData);
             toast("Sign Up Successful", {
                 position: 'bottom-right',
             });
