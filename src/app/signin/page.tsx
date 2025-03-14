@@ -30,11 +30,11 @@ const SignIn = () => {
                 position: 'bottom-right',
             });
             router.push('/');
-        } catch (error: any) {
+        } catch (error: unknown) {
             // console.log("Error Occured: ", error);
-            if(error.response)
+            if(axios.isAxiosError(error))
             {
-                const {status} = error.response;
+                const status = error.response?.status;
                 if(status === 401)
                 {
                     toast.error("Incorrect Credentials!", {
