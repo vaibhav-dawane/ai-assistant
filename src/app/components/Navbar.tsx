@@ -1,29 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import { LogIn, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Navbar = () => {
     
     const [isLoggedIn, setisLoggedIn] = useState(false);
     useEffect(() => {
         async function verifyToken() {
-            const response = await fetch('/api/verify-token');
-            console.log("Response after refresh: ",response);
-            if(response.ok){
-                // console.log("User Is logged in");
-                setisLoggedIn(true);
-            }
-            else
-            {
-                // console.log("Unauthorised User");
-                setisLoggedIn(false);
+            try {
+                const response = await fetch('/api/verify-token');
+                // console.log("Response after refresh: ",response);
+                if(response.ok){
+                    // console.log("User Is logged in");
+                    setisLoggedIn(true);
+                }
+                else
+                {
+                    setisLoggedIn(false);
+                }
+            } catch (error) {
+                console.log("Error Occured in Navbar: ", error);
             }
         }
         verifyToken();
     }, []);
 
-    const logOut = () => {
-        console.log("Log Out Successful");
+    const logOut = async () => {
+        try {
+            const res = await fetch('/api/logout', { method: 'POST' });
+            console.log("Data in logout: ",res);
+
+            if(res.ok)
+            {
+                toast.success("Log Out Successful", {
+                    position: 'bottom-right',
+                });
+                setisLoggedIn(false);
+            }
+            else {
+                throw new Error("Logout failed");
+            }
+        } catch (error) {
+            console.log("Error Occured: ", error);
+            toast.error("Logout Failed!", {
+                position: 'bottom-right',
+            });
+        }
     }
 
     return (

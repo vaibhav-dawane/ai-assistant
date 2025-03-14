@@ -2,8 +2,10 @@
 import axios from 'axios';
 import { ArrowLeftToLine } from 'lucide-react';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import React, { useRef, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface UserData {
     email: string;
@@ -12,15 +14,52 @@ interface UserData {
 
 const SignIn = () => {
     const [userData, setUserData] = useState<UserData>({email: "", password: ""});
+    const router = useRouter();
 
     const submitData = async () => {
-        try {
-            const res = await axios.post('/api/signin', userData);
-            console.log(res.data.message);
-        } catch (error) {
-            console.log("Error Occured: ", error);
+        if (!userData.email || !userData.password) {
+            toast.error("Please enter both email and password!", { position: 'bottom-right' });
+            return;
         }
-        redirect('/');
+        try {
+            console.log("Userdata before sending: ", userData);
+            const res = await axios.post('/api/signin', userData);
+            console.log("Response: ", res.status);
+
+            toast.success("Log In Successful", {
+                position: 'bottom-right',
+            });
+            router.push('/');
+        } catch (error: any) {
+            // console.log("Error Occured: ", error);
+            if(error.response)
+            {
+                const {status} = error.response;
+                if(status === 401)
+                {
+                    toast.error("Incorrect Credentials!", {
+                        position: 'bottom-right',
+                    });
+                }
+                else if(status === 404)
+                {
+                    console.log("User Not Found");
+                    toast.error("User Not Found!", {
+                        position: 'bottom-right',
+                    });
+                }
+                else
+                {
+                    toast.error("Something went wrong. Please try again!", {
+                        position: 'bottom-right',
+                    });
+                }
+            }
+            else
+            {
+                toast.error("Network error. Please check your connection!", { position: 'bottom-right' });
+            }
+        }
     }
 
     const checkRef = useRef<HTMLInputElement>(null);
@@ -32,6 +71,7 @@ const SignIn = () => {
 
     return (
         <div className='w-full h-[100vh]'>
+        <ToastContainer />
             <div className='h-1/6 p-8'>
                 <Link href='/'>
                     <div className='cursor-pointer hover:bg-gray-100 p-2 inline-block rounded-full'>

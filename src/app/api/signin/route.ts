@@ -9,26 +9,27 @@ export async function POST(req: Request)
 {
     try {
         const { email, password } = await req.json(); 
-        // console.log("Received data:", email);
+        console.log("Received data:", email);
 
-        // to check user
-        const user = await prisma.user.findUnique({where: {
-            email
-        }})
-
-        // console.log("User is: ", user);
+        let user;
+        try {
+            // to check user
+            user = await prisma.user.findUnique({where: {
+                email
+            }})
+        } catch (error) {
+            return NextResponse.json({message: "Error Occured While fetching data"}, {status: 500})
+        }
     
         // check if user exist or not
         if(!user)
         {
-            return NextResponse.json({message: "User Does not Exist"})
+            return NextResponse.json({message: "User Does not Exist"}, {status: 404})
         }
 
         //compare password
         const isMatch = await bcrypt.compare(password, user.password);
-        if(!isMatch)    return NextResponse.json({message: "Incorrect Credentials"})
-
-        // console.log("Matched User: ", user);
+        if(!isMatch)    return NextResponse.json({message: "Incorrect Credentials"}, {status: 401})
         
         const SECRET_KEY = process.env.JWT_SECRET || "yourSecret";
         const token = jwt.sign({ email: email, id: user.id}, SECRET_KEY, { expiresIn: "1h" });
@@ -39,15 +40,17 @@ export async function POST(req: Request)
             maxAge: 60 * 60, // 1 hour
         });
     
-        const response = NextResponse.json({ message: "LogIn Successful" });
+        const response = NextResponse.json({ message: "LogIn Successful" }, {status: 200});
         response.headers.set("Set-Cookie", cookie);
+        
         return response;
         
     } catch (error) {   
-        console.log("Error Occured: ", error);
+        console.log("Error Occured In SignIn Route: ", error);
         return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
     }
-    finally{
+    finally
+    {
         await prisma.$disconnect();
     }
 }

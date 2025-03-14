@@ -3,7 +3,9 @@ import { ArrowLeftToLine } from 'lucide-react';
 import Link from 'next/link';
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface UserData {
     name: string;
@@ -12,6 +14,8 @@ interface UserData {
 }
 
 const SignUp = () => {
+
+    const router = useRouter();
 
     const [userData, setUserData] = useState<UserData>({name: "",
         email: "",
@@ -27,11 +31,14 @@ const SignUp = () => {
     const submitData = async () => {
         try {
             const res = await  axios.post('api/signup', userData);
+            toast("Sign Up Successful", {
+                position: 'bottom-right',
+            });
+            router.push('/');
             console.log(res.data.message);
         } catch (error) {
             console.log("Error Occured: ", error);
         }
-        redirect('/');
     }
 
     return (
@@ -45,6 +52,7 @@ const SignUp = () => {
             </div>
             <div className='flex justify-center items-center select-none'>
                 <div className='w-full max-w-[400px] h-[380px] shadow-xl rounded-md bg-white mx-auto'>
+                {/* <ToastContainer /> */}
                     <h1 className='flex justify-center mt-6 font-extrabold text-lg sm:text-xl'>Sign Up</h1>
                     <div className='mt-2 mx-3 sm:mx-6'>
                         <div className='grid gap-1 mt-2'>

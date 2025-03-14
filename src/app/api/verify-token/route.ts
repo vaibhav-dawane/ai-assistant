@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest)
 {
+    console.log("Verify Token Route");
     try {
         const secret = process.env.JWT_SECRET || "yoursecret";
 
