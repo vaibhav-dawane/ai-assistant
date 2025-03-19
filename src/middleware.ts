@@ -18,6 +18,7 @@ export function middleware(request: NextRequest) {
     if(token && publicPath){
         return NextResponse.redirect(new URL('/', request.url))
     }
+    return NextResponse.next();
 }
  
 // middleware will run on following path
